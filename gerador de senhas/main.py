@@ -1,5 +1,22 @@
 from random import choice
 
+def interface():
+    print("-" * 30)
+    print("Gerador de Senhas".center(30))
+    print("-" * 30)
+    print()
+
+def menu(opcoes):
+    for opcao in opcoes:
+        print(opcao)
+    print()
+    while True:
+        valor = valida_num("Escolha uma opção: ")
+        if 1 <= valor <= len(opcoes):
+            return valor
+        else:
+            print("ERRO! Digite uma opção válida.")
+
 def valida_num(msg):
     while True:
         try:
@@ -8,22 +25,22 @@ def valida_num(msg):
             print("ERRO! Digite um número inteiro válido.")
             continue
         else:
-            if valor < 4:
-                print("ERRO! O tamanho da senha deve ser no mínimo 4 caracteres.")
-                continue
-            else:
-                return valor
+            return valor
 
-print("-" * 30)
-print("Gerador de Senhas".center(30))
-print("-" * 30)
-print()
+# Código Principal
+
+interface()
+opcao_menu = menu(["1 - Apenas letras", "2 - Letras e números", "3 - Letras, números e símbolos"])
 
 classificacao = ["Fraca", "Média", "Forte"]
 senha = ""
 caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-tamanhoSenha = valida_num("Escolha o tamanho da senha (mínimo 4 caracteres): ")
+while True:
+    tamanhoSenha = valida_num("Escolha o tamanho da senha (mínimo 4 caracteres): ")
+    if tamanhoSenha < 4:
+        print("ERRO! O tamanho da senha deve ser no mínimo 4 caracteres.")
+    else: break
 
 while len(senha) < tamanhoSenha:
     senha += choice(caracteres)
