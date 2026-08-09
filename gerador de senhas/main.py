@@ -1,9 +1,9 @@
-from random import randint, choice
+from random import choice
 
-def validaNum(tamTexto):
+def valida_num(msg):
     while True:
         try:
-            valor = int(input(tamTexto))
+            valor = int(input(msg))
         except ValueError:
             print("ERRO! Digite um número inteiro válido.")
             continue
@@ -19,26 +19,20 @@ print("Gerador de Senhas".center(30))
 print("-" * 30)
 print()
 
-listaSorteio = []
-listaLetrasMaiusculas = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T",
-                                    "U", "V", "W", "X", "Y", "Z"]
-listaLetrasMinusculas = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s",
-                                    "t", "u", "v", "w", "x", "y", "z"]
-listaNumeros = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+classificacao = ["Fraca", "Média", "Forte"]
+senha = ""
+caracteres = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
-tamanhoSenha = validaNum("Escolha o tamanho da senha (mínimo 4 caracteres): ")
-sorteio = randint(1, tamanhoSenha)
+tamanhoSenha = valida_num("Escolha o tamanho da senha (mínimo 4 caracteres): ")
 
-while len(listaSorteio) < tamanhoSenha:
-    if sorteio == 1:
-        listaSorteio.append(choice(listaLetrasMaiusculas))
-    elif sorteio == 2:
-        listaSorteio.append(choice(listaLetrasMinusculas))
-    elif sorteio == 3:
-        listaSorteio.append(choice(listaNumeros))
-    else:
-        continue
-    sorteio = randint(1, tamanhoSenha)
-
-senha = "".join(listaSorteio)
+while len(senha) < tamanhoSenha:
+    senha += choice(caracteres)
+    
 print(f"\nSenha gerada: {senha}")
+
+if len(senha) < 6:
+    print(f"Classificação da senha: {classificacao[0]}")
+elif len(senha) < 8:
+    print(f"Classificação da senha: {classificacao[1]}")
+else:
+    print(f"Classificação da senha: {classificacao[2]}")
